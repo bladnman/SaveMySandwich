@@ -36,10 +36,7 @@ fileprivate func getDiameter(fromDiameter diameter: CGFloat, withRatio ratio: CG
 open class TLAnalogJoystickHiddenArea: SKShapeNode {
     private var currJoystick: TLAnalogJoystick?
     
-//    init( radius: CGFloat, lineWidth: CGFloat, fillColor: SKColor, strokeColor: SKColor ) {
-//        super.init()
-//        self.lineWidth = 0
-//    }
+    // default to no line width
     init( rect: CGRect ) {
         super.init()
         path = CGPath(rect: rect, transform: nil)

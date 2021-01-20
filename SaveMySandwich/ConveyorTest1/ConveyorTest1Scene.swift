@@ -9,7 +9,7 @@ import GameplayKit
 import UIKit
 
 
-class ConveyorTest1Scene: SKScene {
+class ConveyorTest1Scene: SKScene, SKPhysicsContactDelegate {
     
     var player:SKSpriteNode?
     var target:SKSpriteNode?
@@ -19,37 +19,43 @@ class ConveyorTest1Scene: SKScene {
     let conveyorCategory:UInt32 = 0x1 << 1
     let targetCategory:UInt32 = 0x1 << 2
     
+    // joystick
     let jsMoveJoystick = 🕹(withDiameter: 120)
-    let jsRotateJoystick = TLAnalogJoystick(withDiameter: 120)
+//    let jsRotateJoystick = TLAnalogJoystick(withDiameter: 120)
     let jsMoveSpeed = 0.2
     let jsIsMoveable = true
     
     // MARK: DID MOVE
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        
         createTarget()
         createPlayer()
+        createConveyors()
         createJoystick()
-        
     }
+    
+    
+    // MARK: MOVES
+    func handleJoysticMove(withVelocity velocity:CGPoint) {
+        let speed = CGFloat(jsMoveSpeed)
+        if let player = self.player {
+            // add to current positions with stic velocty
+            let newX = player.position.x + (velocity.x * speed)
+            let newY = player.position.y + (velocity.y * speed)
+            // set new position
+            player.position = CGPoint(x: newX, y: newY )
+        }
+
+    }
+    
     
     // MARK: TOUCHES
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let location = touch.previousLocation(in: self)
-            let node = self.nodes(at: location).first
-            
-            if node?.name == "right" {
-//                moveToNextTrack()
-            } else if node?.name == "up" {
-//                moveVertically(up: true)
-            } else if node?.name == "down" {
-//                moveVertically(up: false)
-            } else if node?.name == "pause" {
-                if let scene = self.scene {
-                    scene.isPaused = !scene.isPaused
-                }
-            }
-        }
+//        if let touch = touches.first {
+//            let location = touch.previousLocation(in: self)
+//            let node = self.nodes(at: location).first
+//        }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         player?.removeAllActions()
@@ -59,8 +65,49 @@ class ConveyorTest1Scene: SKScene {
     }
     
     
+    // MARK: PHYSICS
+    func didBegin(_ contact: SKPhysicsContact) {
+        var playerBody:SKPhysicsBody
+        var otherBody:SKPhysicsBody
+
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            playerBody = contact.bodyA
+            otherBody = contact.bodyB
+        } else {
+            playerBody = contact.bodyB
+            otherBody = contact.bodyA
+        }
+        
+        if playerBody.categoryBitMask == playerCategory && otherBody.categoryBitMask == conveyorCategory {
+            self.player?.physicsBody?.velocity = CGVector(dx:0, dy: 350.0)
+        }
+    }
+    func didEnd(_ contact: SKPhysicsContact) {
+        var playerBody:SKPhysicsBody
+        var otherBody:SKPhysicsBody
+
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            playerBody = contact.bodyA
+            otherBody = contact.bodyB
+        } else {
+            playerBody = contact.bodyB
+            otherBody = contact.bodyA
+        }
+        
+        if playerBody.categoryBitMask == playerCategory && otherBody.categoryBitMask == conveyorCategory {
+            self.player?.physicsBody?.velocity = CGVector(dx:0, dy: 0.0)
+        }
+    }
+    
+    
     // MARK: UPDATE
     override func update(_ currentTime: TimeInterval) {
-        // tbd
+        if let player = self.player {
+            // FAIL - exited play area
+            if player.position.y > self.size.height || player.position.y < 0 {
+//                self.run(SKAction.playSoundFileNamed("fail.wav", waitForCompletion: true))
+                print("failed")
+            }
+        }
     }
 }

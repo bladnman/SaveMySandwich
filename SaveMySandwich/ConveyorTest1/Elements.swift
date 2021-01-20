@@ -17,13 +17,41 @@ extension ConveyorTest1Scene {
         target?.physicsBody?.categoryBitMask = targetCategory
         target?.physicsBody?.affectedByGravity = false
         target?.physicsBody?.collisionBitMask = 0 // not affected by being hit
+        target?.physicsBody?.contactTestBitMask = playerCategory
     }
     func createPlayer() {
-        player = self.childNode(withName: "player") as? SKSpriteNode
-        player?.physicsBody = SKPhysicsBody(circleOfRadius: player!.size.width/2)
-        player?.physicsBody?.categoryBitMask = playerCategory
-        player?.physicsBody?.affectedByGravity = false
-        player?.physicsBody?.collisionBitMask = 0 // not affected by being hit
+        if let player = self.childNode(withName: "player") as? SKSpriteNode {
+            player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
+            player.physicsBody?.categoryBitMask = playerCategory
+            player.physicsBody?.affectedByGravity = false
+            player.physicsBody?.collisionBitMask = 0 // not affected by being hit
+            player.physicsBody?.contactTestBitMask = conveyorCategory
+            
+            // CONSTRAIN THE PLAYER TO THE BOARD (ish)
+            let playerWidth = player.size.width
+            let playerHeight = player.size.height
+            let playerWidth2 =  playerWidth / 2
+            let playerHeight2 = playerHeight / 2
+            let xRange = SKRange(lowerLimit: 0 + playerWidth2, upperLimit: size.width - playerWidth2)
+            let yRange = SKRange(lowerLimit: 0 + playerHeight2 - playerHeight, upperLimit: size.height - playerHeight2 + playerHeight)
+            player.constraints = [SKConstraint.positionX(xRange, y:yRange)]
+            
+            
+            self.player = player
+        }
+    }
+    func createConveyors() {
+        for child in self.children {
+            if child.name == "conveyor" {
+                child.physicsBody = SKPhysicsBody(rectangleOf: child.frame.size)
+                child.physicsBody?.categoryBitMask = conveyorCategory
+                child.physicsBody?.affectedByGravity = false
+                child.physicsBody?.collisionBitMask = 0
+                child.physicsBody?.contactTestBitMask = playerCategory
+                
+            }
+        }
+
     }
     
     /*

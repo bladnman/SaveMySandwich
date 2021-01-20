@@ -28,14 +28,15 @@ extension ConveyorTest1Scene {
 //        }
         
         jsMoveJoystick.on(.move) { [unowned self] joystick in
-            guard let player = self.player else {
-                return
-            }
+//            guard let player = self.player else {
+//                return
+//            }
+//            let pVelocity = joystick.velocity;
+//            let speed = CGFloat(jsMoveSpeed)
+//            player.position = CGPoint(x: player.position.x + (pVelocity.x * speed), y: player.position.y + (pVelocity.y * speed))
             
-            let pVelocity = joystick.velocity;
-            let speed = CGFloat(jsMoveSpeed)
-            
-            player.position = CGPoint(x: player.position.x + (pVelocity.x * speed), y: player.position.y + (pVelocity.y * speed))
+            // handle this in SCENE file
+            self.handleJoysticMove(withVelocity: joystick.velocity)
         }
         
 //        moveJoystick.on(.end) { [unowned self] _ in
@@ -43,23 +44,22 @@ extension ConveyorTest1Scene {
 //        }
 
     }
-    func _setUpRotateJoystick(isMoveable:Bool=true) {
-        let rotateJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: frame.midX, y: 0, width: frame.midX, height: frame.height))
-        rotateJoystickHiddenArea.joystick = jsRotateJoystick
-        addChild(rotateJoystickHiddenArea)
-        
-        //MARK: Rotate Handlers
-        jsRotateJoystick.on(.move) { [unowned self] joystick in
-            guard let player = self.player else {
-                return
-            }
-
-            player.zRotation = joystick.angular
-        }
-        
-        jsRotateJoystick.on(.end) { [unowned self] _ in
-            self.player?.run(SKAction.rotate(byAngle: 3.6, duration: 0.5))
-        }
-        
-    }
+//    func _setUpRotateJoystick(isMoveable:Bool=true) {
+//        let rotateJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: frame.midX, y: 0, width: frame.midX, height: frame.height))
+//        rotateJoystickHiddenArea.joystick = jsRotateJoystick
+//        addChild(rotateJoystickHiddenArea)
+//
+//        //MARK: Rotate Handlers
+//        jsRotateJoystick.on(.move) { [unowned self] joystick in
+//            guard let player = self.player else {
+//                return
+//            }
+//
+//            player.zRotation = joystick.angular
+//        }
+//
+//        jsRotateJoystick.on(.end) { [unowned self] _ in
+//            self.player?.run(SKAction.rotate(byAngle: 3.6, duration: 0.5))
+//        }
+//    }
 }
