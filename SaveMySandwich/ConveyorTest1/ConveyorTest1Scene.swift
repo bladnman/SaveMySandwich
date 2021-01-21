@@ -17,7 +17,8 @@ class ConveyorTest1Scene: SKScene, SKPhysicsContactDelegate {
     // physics categories
     let playerCategory:UInt32 = 0x1 << 0
     let conveyorCategory:UInt32 = 0x1 << 1
-    let targetCategory:UInt32 = 0x1 << 2
+    let wallCategory:UInt32 = 0x1 << 2
+    let targetCategory:UInt32 = 0x1 << 4
     
     // joystick
     let jsMoveJoystick = 🕹(withDiameter: 120)

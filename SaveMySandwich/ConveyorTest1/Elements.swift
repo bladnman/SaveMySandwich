@@ -25,7 +25,7 @@ extension ConveyorTest1Scene {
             player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
             player.physicsBody?.categoryBitMask = playerCategory
             player.physicsBody?.affectedByGravity = false
-            player.physicsBody?.collisionBitMask = 0 // not affected by being hit
+            player.physicsBody?.collisionBitMask = wallCategory
             player.physicsBody?.contactTestBitMask = conveyorCategory
             
             // CONSTRAIN THE PLAYER TO THE BOARD (ish)
@@ -45,7 +45,7 @@ extension ConveyorTest1Scene {
         for child in self.children {
             if child is ConveyorSpriteNode {
                 let conveyor = child as! ConveyorSpriteNode
-                print("Found a conveyor!")
+                
                 // choose a velocity
                 conveyor.velocity = CGFloat(CONVEYOR_SPEEDS.randomElement()!)
                 
@@ -55,13 +55,36 @@ extension ConveyorTest1Scene {
                 conveyor.physicsBody?.collisionBitMask = 0
                 conveyor.physicsBody?.contactTestBitMask = playerCategory
                 
+                createWalls(forConveyor: conveyor)
             }
         }
+        
+        
 
     }
     
     
-    
+    func createWalls(forConveyor conveyor: ConveyorSpriteNode) {
+        for child in conveyor.children {
+            if child.name == "wall" {
+                let wall = child as! SKSpriteNode
+                print("Found a wall!")
+//                wall.physicsBody = SKPhysicsBody(rectangleOf: wall.frame.size)
+                wall.physicsBody?.categoryBitMask = wallCategory
+                wall.physicsBody?.affectedByGravity = false
+                wall.physicsBody?.collisionBitMask = playerCategory
+                wall.physicsBody?.contactTestBitMask = 0
+            }
+        }
+        
+        for child in conveyor.children {
+            if child.name == "cutter" {
+                print("Found a cutter")
+              child.removeFromParent()
+            }
+        }
+
+    }
     
     
     /*
