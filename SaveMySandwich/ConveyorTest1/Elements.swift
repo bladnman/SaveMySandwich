@@ -45,7 +45,7 @@ extension ConveyorTest1Scene {
         for child in self.children {
             if child is ConveyorSpriteNode {
                 let conveyor = child as! ConveyorSpriteNode
-                
+                print("Found a conveyor!")
                 // choose a velocity
                 conveyor.velocity = CGFloat(CONVEYOR_SPEEDS.randomElement()!)
                 

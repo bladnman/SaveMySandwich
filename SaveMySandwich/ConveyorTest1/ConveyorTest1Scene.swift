@@ -83,6 +83,7 @@ class ConveyorTest1Scene: SKScene, SKPhysicsContactDelegate {
         }
         
         if playerBody.categoryBitMask == playerCategory && otherBody.categoryBitMask == conveyorCategory {
+            print("stepped on us")
             let conveyor = otherBody.node as! ConveyorSpriteNode
             self.player?.physicsBody?.velocity = CGVector(dx:0, dy: conveyor.velocity)
         }
