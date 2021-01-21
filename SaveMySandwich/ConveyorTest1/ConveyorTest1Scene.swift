@@ -25,6 +25,10 @@ class ConveyorTest1Scene: SKScene, SKPhysicsContactDelegate {
     let jsMoveSpeed = 0.2
     let jsIsMoveable = true
     
+    // CONVEYOR
+    let CONVEYOR_SPEEDS = [-200.0, -100.0, 0, 100, 200]
+    
+    
     // MARK: DID MOVE
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -79,7 +83,8 @@ class ConveyorTest1Scene: SKScene, SKPhysicsContactDelegate {
         }
         
         if playerBody.categoryBitMask == playerCategory && otherBody.categoryBitMask == conveyorCategory {
-            self.player?.physicsBody?.velocity = CGVector(dx:0, dy: 350.0)
+            let conveyor = otherBody.node as! ConveyorSpriteNode
+            self.player?.physicsBody?.velocity = CGVector(dx:0, dy: conveyor.velocity)
         }
     }
     func didEnd(_ contact: SKPhysicsContact) {

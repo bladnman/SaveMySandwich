@@ -11,6 +11,7 @@ import UIKit
 
 extension ConveyorTest1Scene {
 
+    
     func createTarget() {
         target = self.childNode(withName: "target") as? SKSpriteNode
         target?.physicsBody = SKPhysicsBody(circleOfRadius: target!.size.width/2)
@@ -42,17 +43,26 @@ extension ConveyorTest1Scene {
     }
     func createConveyors() {
         for child in self.children {
-            if child.name == "conveyor" {
-                child.physicsBody = SKPhysicsBody(rectangleOf: child.frame.size)
-                child.physicsBody?.categoryBitMask = conveyorCategory
-                child.physicsBody?.affectedByGravity = false
-                child.physicsBody?.collisionBitMask = 0
-                child.physicsBody?.contactTestBitMask = playerCategory
+            if child is ConveyorSpriteNode {
+                let conveyor = child as! ConveyorSpriteNode
+                
+                // choose a velocity
+                conveyor.velocity = CGFloat(CONVEYOR_SPEEDS.randomElement()!)
+                
+                conveyor.physicsBody = SKPhysicsBody(rectangleOf: conveyor.frame.size)
+                conveyor.physicsBody?.categoryBitMask = conveyorCategory
+                conveyor.physicsBody?.affectedByGravity = false
+                conveyor.physicsBody?.collisionBitMask = 0
+                conveyor.physicsBody?.contactTestBitMask = playerCategory
                 
             }
         }
 
     }
+    
+    
+    
+    
     
     /*
      * SEE GameJoystick

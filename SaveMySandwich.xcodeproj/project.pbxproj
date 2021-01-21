@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C0DD41725B8F5DE00C21F81 /* ConveyorSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0DD41625B8F5DE00C21F81 /* ConveyorSpriteNode.swift */; };
 		F98CFBC925B5194000FFBF0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CFBC825B5194000FFBF0D /* AppDelegate.swift */; };
 		F98CFBCB25B5194000FFBF0D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F98CFBCA25B5194000FFBF0D /* GameScene.sks */; };
 		F98CFBCD25B5194100FFBF0D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = F98CFBCC25B5194100FFBF0D /* Actions.sks */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C0DD41625B8F5DE00C21F81 /* ConveyorSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConveyorSpriteNode.swift; sourceTree = "<group>"; };
 		F98CFBC525B5194000FFBF0D /* SaveMySandwich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveMySandwich.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F98CFBC825B5194000FFBF0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F98CFBCA25B5194000FFBF0D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C0DD41525B8F5C300C21F81 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				6C0DD41625B8F5DE00C21F81 /* ConveyorSpriteNode.swift */,
+			);
+			path = classes;
+			sourceTree = "<group>";
+		};
 		F98CFBBC25B5194000FFBF0D = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +100,7 @@
 		F98CFBC725B5194000FFBF0D /* SaveMySandwich */ = {
 			isa = PBXGroup;
 			children = (
+				6C0DD41525B8F5C300C21F81 /* classes */,
 				F98CFBDF25B5196400FFBF0D /* ConveyorTest1 */,
 				F98CFBDE25B5195400FFBF0D /* visual */,
 				F98CFBC825B5194000FFBF0D /* AppDelegate.swift */,
@@ -106,11 +117,11 @@
 		F98CFBDE25B5195400FFBF0D /* visual */ = {
 			isa = PBXGroup;
 			children = (
+				F98CFBE725B519C800FFBF0D /* ConveyorTest1Scene.sks */,
+				F98CFBCA25B5194000FFBF0D /* GameScene.sks */,
 				F98CFBD225B5194100FFBF0D /* Main.storyboard */,
 				F98CFBEE25B51C2600FFBF0D /* Launch Screen.storyboard */,
-				F98CFBCA25B5194000FFBF0D /* GameScene.sks */,
 				F98CFBCC25B5194100FFBF0D /* Actions.sks */,
-				F98CFBE725B519C800FFBF0D /* ConveyorTest1Scene.sks */,
 			);
 			path = visual;
 			sourceTree = "<group>";
@@ -230,6 +241,7 @@
 				F98CFC1B25B6572500FFBF0D /* GameJoystick.swift in Sources */,
 				F98CFBF725B51EE800FFBF0D /* Elements.swift in Sources */,
 				F98CFBD125B5194100FFBF0D /* GameViewController.swift in Sources */,
+				6C0DD41725B8F5DE00C21F81 /* ConveyorSpriteNode.swift in Sources */,
 				F98CFBC925B5194000FFBF0D /* AppDelegate.swift in Sources */,
 				F98CFBE425B519AF00FFBF0D /* ConveyorTest1Scene.swift in Sources */,
 			);
